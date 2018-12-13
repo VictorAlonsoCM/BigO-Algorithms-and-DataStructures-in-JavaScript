@@ -10,10 +10,57 @@ class HashTable {
     }
     return hash;
   }
+
+  set(key, value){
+    let address = this._hash(key);
+    if(!this.data[address]) {
+      this.data[address] = [];
+    }
+    this.data[address].push([key, value]);
+    console.log('SET: ', this.data);
+    return this.data;
+  }
+
+  get(key) {
+    let address = this._hash(key);
+    const currentBucket = this.data[address];
+    if(currentBucket) {
+      for(let i = 0; i < currentBucket.length; i++){
+        if(currentBucket[i][0] === key){
+          console.log('GET: ', currentBucket[i][1]);
+          return currentBucket[i][1];
+        }
+      }
+    }
+    return undefined;
+  }
+
+  keys() {
+    const keysArray = [];
+    for(let i = 0; i < this.data.length; i++){
+      if(this.data[i]){
+        keysArray.push(this.data[i][0][0])
+      }
+    }
+    console.log(keysArray);
+    return keysArray;
+  }
+
+  values() {
+    const valuesArray = [];
+    for(let i = 0; i < this.data.length; i++){
+      if(this.data[i]){
+        valuesArray.push(this.data[i][0][1]);
+      }
+    }
+    console.log('Values: ', valuesArray);
+    return valuesArray;
+  }
 }
 
 const myHashTable = new HashTable(50);
-myHashTable.set('grapes', 10000)
-myHashTable.get('grapes')
-myHashTable.set('apples', 9)
-myHashTable.get('apples')
+myHashTable.set('grapes', 10000);
+myHashTable.set('apples', 54);
+myHashTable.set('oranges', 2);
+myHashTable.keys();
+myHashTable.values();
