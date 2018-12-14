@@ -29,13 +29,14 @@ function firstRecurringCharacter(input) {
 //Bonus... What if we had this:
 // [2,5,5,2,3,5,1,2,4]
 // return 5 because the pairs are before 2,2
-// array = [2,3,4,5]; // It should return undefined
+// array = [2,3,4,5];           // It should return undefined
 // array = [2,1,0,9,3,5,7,2,4]; // It should return 2
 // array = [2,5,5,2,3,5,1,2,4]; // It should return 5
 // array = [2,1,1,2,3,5,1,2,4]; // It should return 1
-array = [2,5,1,2,3,5,1,2,4]; // It should return 2
+array =  [2,5,5,2,3,5,1,2,4];   // It should return 2
 firstRecurringCharacter(array)
 firstRecurringCharacter2(array)
+firstRecurringCharacter3(array)
 /****************************
 // Time Complexity  O(n)    |
 // Space Complexity O(n)    |
@@ -56,3 +57,32 @@ function firstRecurringCharacter2(input) {
   console.log(undefined);
   return undefined;
 }
+
+/****************************
+// Time Complexity  O(n)    |
+// Space Complexity O(n)    |
+****************************/
+
+// Third solution, but the worst:
+
+function firstRecurringCharacter3(input) {
+  let position = input.length;
+  for(let i = 0; i < input.length; i++){
+    for(let j = i + 1; j < input.length; j++){
+      if(input[i] === input[j] && j <= position){
+        position = j;
+      }
+    }
+  }
+  if(position !== input.length){
+    console.log(input[position]);
+    return input[position];
+  }
+  console.log(undefined);
+  return undefined;
+}
+
+/****************************
+// Time Complexity  O(n^2)  |
+// Space Complexity O(1)    |
+****************************/
